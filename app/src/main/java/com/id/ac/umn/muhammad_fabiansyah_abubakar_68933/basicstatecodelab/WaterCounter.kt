@@ -12,10 +12,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.Row
+
 
 @Composable
-fun WaterCounter() {
-    Column(modifier = Modifier.padding(16.dp)) {
+fun WaterCounter(modifier: Modifier = Modifier) {
+    Column(modifier = modifier.padding(16.dp)) {
         var count by remember { mutableStateOf(0) }
         if (count > 0) {
             var showTask by remember { mutableStateOf(true) }
@@ -28,8 +30,15 @@ fun WaterCounter() {
             Text("You've had $count glasses.")
         }
 
-        Button(onClick = { count++ }, enabled = count < 10) {
-            Text("Add one")
+        Row(Modifier.padding(top = 8.dp)) {
+            Button(onClick = { count++ }, enabled = count < 10) {
+                Text("Add one")
+            }
+            Button(
+                onClick = { count = 0 },
+                Modifier.padding(start = 8.dp)) {
+                Text("Clear water count")
+            }
         }
     }
 }
